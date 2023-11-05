@@ -1,12 +1,14 @@
 'use client';
 
 import React, { useState, useEffect, useContext } from 'react'
+import { useRouter } from 'next/navigation'
 import { useMutation } from '@apollo/client'
 import { Context } from '@/app/page'
 import { Container, ErrorMessage, Input, SignInButton, Form } from './page.style'
 import { LOGIN } from '@/app/queries';
 
 const SignIn = () => {
+  const router = useRouter()
   const [login, { loading, data }] = useMutation(LOGIN)
   const { updateAuth, updateUser } = useContext(Context)
   const [email, setEmail] = useState<string>('')
@@ -22,6 +24,7 @@ const SignIn = () => {
       case 'Login':
         updateAuth(data.login)
         updateUser(data.login.user)
+        router.push('/dashboard')
         break;
       case 'Error':
         setErrorMessage(data.login.error.message);
