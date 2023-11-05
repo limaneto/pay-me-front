@@ -40,3 +40,8 @@ export const SignInButton = styled.button`
   margin-top: 30px;
   cursor: pointer;
 `;
+
+export const ErrorMessage = styled.span`
+  color: red;
+  font-size: 14px;
+`
