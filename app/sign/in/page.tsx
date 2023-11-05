@@ -9,6 +9,19 @@ const SignIn = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
+  const signIn = async () => {
+    const response = await fetch(
+      'http://localhost:4000/graphql',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email, password }),
+      }
+    )
+  }
+
   return (
     <Form action="">
       <h1>Welcome to Pay Me</h1>
@@ -30,7 +43,7 @@ const SignIn = () => {
           value={password}
         />
       </Container>
-      <SignInButton>Sign in</SignInButton>
+      <SignInButton onClick={signIn} >Sign in</SignInButton>
     </Form>
   )
 }
