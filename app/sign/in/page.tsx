@@ -3,14 +3,14 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { useRouter } from 'next/navigation'
 import { useMutation } from '@apollo/client'
-import { Context } from '@/app/page'
+import { GlobalContext } from '../../context-provider'
 import { Container, ErrorMessage, Input, SignInButton, Form } from './page.style'
 import { LOGIN } from '@/app/queries';
 
 const SignIn = () => {
   const router = useRouter()
   const [login, { loading, data }] = useMutation(LOGIN)
-  const { updateAuth, updateUser } = useContext(Context)
+  const { updateAuth, updateUser } = useContext(GlobalContext)
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
   const [errorMessage, setErrorMessage] = useState<string | undefined>()
@@ -24,6 +24,7 @@ const SignIn = () => {
       case 'Login':
         updateAuth(data.login)
         updateUser(data.login.user)
+        localStorage.setItem('token', data.login.token)
         router.push('/dashboard')
         break;
       case 'Error':

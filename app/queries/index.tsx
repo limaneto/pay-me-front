@@ -26,4 +26,23 @@ export const LOGIN = gql(`
       }
     }
   }
-`);
+`)
+
+export const GET_CREDITS = gql(`
+  query getMyCredits($page: Int!, $limit: Int!) {
+    getMyCredits(page: $page, limit: $limit) {
+      id
+      isActive
+      title
+      description
+      value
+      debtAccepted
+      debtRefused
+      creditAccepted
+      creditRefused
+      isPaid
+      dateDue
+      dateLoanCompleted
+    }
+  }
+`)

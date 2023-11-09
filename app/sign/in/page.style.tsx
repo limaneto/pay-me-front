@@ -9,7 +9,6 @@ export const Form = styled.form`
   font-size: 32px;
 }
 
-
   display: flex;
   flex-direction: column;
   align-items: center;
